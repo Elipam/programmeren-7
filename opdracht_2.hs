@@ -1,4 +1,5 @@
 -- 2a
+nulpuntena :: Double->Double->Double->[Double]
 
 -- 2b
 
