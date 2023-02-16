@@ -19,5 +19,10 @@ maximum' (x:xs)
     | otherwise = maxTail  
     where maxTail = maximum' xs  
 
+doubleSmallNumber x = if x > 100  
+                    then x  
+                    else x*2 
+premutaties :: [Int]
+take 10 (5) 
 -- 2d
     
