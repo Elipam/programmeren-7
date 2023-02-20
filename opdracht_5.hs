@@ -1,4 +1,8 @@
 -- 5a
 import Data.List
-permutations [1,2,3,4]
+pow :: Integer -> Integer -> Integer
+pow x p
+    | p == 0 = 1
+    | otherwise = x * pow x (p - 1)
+
 -- 5b
