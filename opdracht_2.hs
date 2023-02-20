@@ -11,18 +11,7 @@ nulpuntenb a b c
     where d = b * b - 4 * a * c
 
 -- 2c
-maximum' :: (Ord a) => [a] -> a  
-maximum' [] = error "maximum of empty list"  
-maximum' [x] = x  
-maximum' (x:xs)   
-    | x > maxTail = x  
-    | otherwise = maxTail  
-    where maxTail = maximum' xs  
+dobbelstenen = [ (a,b,c) | c <- [1..6], b <- [1..6], a <- [1..6], (a + b + c) `mod` 5 == 0 ]
 
-doubleSmallNumber x = if x > 100  
-                    then x  
-                    else x*2 
-premutaties :: [Int]
-take 10 (5) 
 -- 2d
-    
+dobbelstenen2 n = [ (a,b,c) | c <- [1..6], b <- [1..6], a <- [1..6], (a + b + c) `mod` n == 0 ]
