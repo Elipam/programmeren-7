@@ -1,7 +1,7 @@
 -- 2a
 nulpuntena :: Double->Double->Double->[Double]  
 nulpuntena a b c = [(-b + sqrt (b * b - 4 * a * c))/ (2 * a), (-b - sqrt (b * b - 4 * a * c))/ (2 * a)]
-
+  
 -- 2b
 nulpuntenb :: Double->Double->Double->[Double]  
 nulpuntenb a b c  
