@@ -11,7 +11,9 @@ nulpuntenb a b c
     where d = b * b - 4 * a * c
 
 -- 2c
+dobbelstenen :: [(Integer, Integer, Integer)]
 dobbelstenen = [ (a,b,c) | c <- [1..6], b <- [1..6], a <- [1..6], (a + b + c) `mod` 5 == 0 ]
 
 -- 2d
+dobbelstenen2 :: Integral c => c -> [(c, c, c)]
 dobbelstenen2 n = [ (a,b,c) | c <- [1..6], b <- [1..6], a <- [1..6], (a + b + c) `mod` n == 0 ]
