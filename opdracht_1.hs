@@ -1,3 +1,4 @@
+import Data.Bits ( Bits(shiftL, shiftR) )
 -- 1a 
 faca :: Integer -> Integer 
 faca 0 = 1 
@@ -52,4 +53,15 @@ pow x p
     | p == 0 = 1
     | otherwise = x * pow x (p - 1)
 
+  {- 
+  pow 1 9100000 kon die nog wel maar
+  pow 1 9200000 leverde een stack overflow op
+  -}
+
+
 -- 5b
+fastpow :: Integer -> Integer -> Integer
+fastpow x 0 = 1
+fastpow x p
+    | even p    = fastpow (x * x) (shiftR p 1)
+    | otherwise = x * fastpow (x * x) (shiftR p 1)
