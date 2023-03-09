@@ -55,18 +55,11 @@ Het gaat erom dat als beide values boven 7 cijfers hebben dan geeft het programm
 -- 4b
 fastmult :: Integer->Integer->Integer
 fastmult a b
-    | a < 0 || b < 0 = error "Werkt niet met negatieve getallen"
-    | otherwise = go a b 0
-    where
-        go _ 0 acc = acc
-        go a b acc
-            | b `mod` 2 == 0 = go (a `shiftL` 1) (b `shiftR` 1) acc
-            | otherwise = go (a `shiftL` 1) (b `shiftR` 1) (acc + a)
--- functie shift a naar links (vermenigvuldigen) en b naar rechts (delen door) totdat b 0 word. 
--- Als het kleinste bit van b 1 is, gooit de functie a in de opslag erbij. 
--- Als laatste leest de functie de opslag wat het product van a en b houd
-
-
+    | a == 0 = 0
+    | b == 0 = 0
+    | even b = c
+    | otherwise = a + c
+    where c = fastmult (shiftL a 1) (shiftR b 1)
 
 -- 5a
 pow :: Integer -> Integer -> Integer
