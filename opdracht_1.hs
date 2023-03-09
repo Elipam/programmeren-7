@@ -40,9 +40,14 @@ opg3 = [(x, y, z)|x<-[-100..100],y<-[-100..100],z<-[-100..100],x==2*(y-z),y==x*z
 -- 4a
 mult :: Integer->Integer->Integer 
 mult a b  
-    | a <= 0    = 0  
-    | otherwise = b + mult (a-1) b  
+    | b <= 0    = 0  
+    | otherwise = a + mult (b-1) a
 
+{-
+De functie mult geeft een stackoverflow bij mult 10000000 10000000.
+1 nul minder kan nog wel, dan kan je ook zoveel cijfers toevoegen als je wel.
+Het gaat erom dat als beide values boven 7 cijfers hebben dan geeft het programma een stackoverflow. 
+-}
 -- 4b
 
 
@@ -50,11 +55,11 @@ mult a b
 -- 5a
 pow :: Integer -> Integer -> Integer
 pow x p
-    | p == 0 = 1
+    | p <= 0 = 1
     | otherwise = x * pow x (p - 1)
 
   {- 
-  pow 1 9100000 kon die nog wel maar
+  pow 1 9100000 haalde het programma nog wel 
   pow 1 9200000 leverde een stack overflow op
   -}
 
@@ -65,3 +70,7 @@ fastpow x 0 = 1
 fastpow x p
     | even p    = fastpow (x * x) (shiftR p 1)
     | otherwise = x * fastpow (x * x) (shiftR p 1)
+
+{-
+Het duurt een tijdje maar het programma kan uiteindelijk wel de values die de mult functie een stackoverflow geven aan
+-}
