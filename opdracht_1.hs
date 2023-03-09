@@ -8,8 +8,7 @@ facb :: Integer -> Integer
 facb n | n == 0 = 1 
        | n /= 0 = n * facb (n-1) 
 
-
-
+-- 2a
 nulpuntena :: Double->Double->Double->[Double]  
 nulpuntena a b c = [(-b + sqrt (b * b - 4 * a * c))/ (2 * a), (-b - sqrt (b * b - 4 * a * c))/ (2 * a)]
        
@@ -29,12 +28,9 @@ dobbelstenen = [ (a,b,c) | a <- [1..6], b <- [1..6], c <- [1..6],   (a + b + c) 
 dobbelstenen2 :: Integral c => c -> [(c, c, c)]
 dobbelstenen2 n = [ (a,b,c) | a <- [1..6], b <- [1..6], c <- [1..6], (a + b + c) `mod` n == 0 ]
 
-
-
+-- 3
 opg3 :: [(Integer, Integer, Integer)]
 opg3 = [(x, y, z)|x<-[-100..100],y<-[-100..100],z<-[-100..100],x==2*(y-z),y==x*z,z*2==x+y]
-
-
 
 -- 4a
 mult :: Integer->Integer->Integer 
