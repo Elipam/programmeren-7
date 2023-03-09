@@ -1,4 +1,5 @@
 import Data.Bits ( Bits(shiftL, shiftR) )
+import Text.XHtml (base)
 -- 1a 
 faca :: Integer -> Integer 
 faca 0 = 1 
@@ -31,7 +32,7 @@ dobbelstenen2 n = [ (a,b,c) | a <- [1..6], b <- [1..6], c <- [1..6], (a + b + c)
 
 -- 3
 opg3 :: [(Integer, Integer, Integer)]
-opg3 = [(x, y, z)|x<-[-100..100],y<-[-100..100],z<-[-100..100],x==2*(y-z),y==x*z,z*2==x+y]
+opg3 = [(a, b, c)|a<-[-100..100],b<-[-100..100],c<-[-100..100],a==2*(b-c),b==a*c,c*2==a+b]
 
 -- 4a
 mult :: Integer->Integer->Integer 
@@ -40,8 +41,18 @@ mult a b
     | otherwise = b + mult (a-1) b  
 
 -- 4b
-
-
+fastmult :: Integer->Integer->Integer
+fastmult a b
+    | a < 0 || b < 0 = error "Werkt niet met negatieve getallen"
+    | otherwise = go a b 0
+    where
+        go _ 0 acc = acc
+        go a b acc
+            | b `mod` 2 == 0 = go (a `shiftL` 1) (b `shiftR` 1) acc
+            | otherwise = go (a `shiftL` 1) (b `shiftR` 1) (acc + a)
+-- functie shift a naar links (vermenigvuldigen) en b naar rechts (delen door) totdat b 0 word. 
+-- Als het kleinste bit van b 1 is, gooit de functie a in de opslag erbij. 
+-- Als laatste leest de functie de opslag wat het product van a en b houd
 
 -- 5a
 pow :: Integer -> Integer -> Integer
