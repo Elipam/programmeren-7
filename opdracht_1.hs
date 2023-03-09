@@ -45,7 +45,6 @@ mult :: Integer->Integer->Integer
 mult a b
     | b <= 0    = 0
     | otherwise = a + mult (b-1) a
-
 {-
 De functie mult geeft een stackoverflow bij mult 10000000 10000000.
 1 nul minder kan nog wel, dan kan je ook zoveel cijfers toevoegen als je wel.
