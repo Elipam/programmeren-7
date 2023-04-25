@@ -1,6 +1,7 @@
 import Text.XHtml (base)
 import Distribution.ModuleName (main)
 import Data.Sequence.Internal.Sorting (popMinQ)
+import System.Win32 (xBUTTON1)
 -- 1a
 euclid :: Integer -> Integer -> Integer
 euclid x y
@@ -42,7 +43,15 @@ generateKey p q = (e,d,m)
     m = modulus p q
 
 --3a
+rsaencrypt :: (Integer, Integer) -> Integer -> Integer
+rsaencrypt (e,m) x = (x^e) `mod` m
+
 --3b
+rsadecrypt :: (Integer, Integer) -> Integer -> Integer
+rsadecrypt (d,m) x = x^d `mod` m
+
 -- 4
+
 -- 5
+
 -- 6
