@@ -13,10 +13,6 @@ egcd :: Integer -> Integer -> (Integer,Integer,Integer)
 egcd 0 b = (b, 0, 1)
 egcd a b =
     let (g, s, t) = egcd (mod b a) a
-<<<<<<< HEAD
-    in do
-      (g, t - div b a * s, s)
-=======
     in (neg g modulo, neg(t- div b a * s)modulo, neg s modulo)
     where modulo = mod a b
 
@@ -25,7 +21,6 @@ neg x m
   | x < 0 = x + m
   | otherwise = x
 
->>>>>>> c9bbd7059f9adee950e893a5f83c5c3a8969de91
 -- 2
 modulus::Integer -> Integer -> Integer
 modulus p q = p*q
