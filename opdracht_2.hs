@@ -22,7 +22,7 @@ neg x m
 -- Neem 2 priemgetallen p en q
 -- m  = p * q
 -- Phi(m) = (p-1)(q-1)
--- Kies een getal dat kleiner is dan phi en waarvan de modulus van e mod m 1 is
+-- Kies een getal dat kleiner is dan phi en waarvan de modulus van dat getal e mod m 1 is
 -- public key: (e, m)
 -- (d * e)mod phi = 1, hiervoor is d = (phi * n > 0) - 1
 -- private key: (d, m)
@@ -37,22 +37,16 @@ neg x m
 modulus::Integer -> Integer -> Integer
 modulus p q = p*q
 
-modulusAccent::Integer -> Integer -> Integer
-modulusAccent p q = (p-1)*(q-1)
+phi::Integer -> Integer -> Integer
+phi p q = (p-1)*(q-1)
 
-privateKey:: Integer -> Integer
-privateKey ma = head [a |a<-[100..ma-1], euclid a ma == 1]
+eBereken:: Integer -> Integer -> Integer
+eBereken e phi
+  | phi == 1    = e
+  | otherwise = eBereken (e-1) phi
 
-publicKey:: Integer -> Integer -> Integer
-publicKey e ma = head [d | d <- [100..], (e * d) mod ma == 1]
-
-generateKey::Integer ->Integer -> (Integer, Integer, Integer)
-generateKey p q = (e,d,m)
-  where
-    ma = modulusAccent p q
-    e = privateKey ma
-    d = publicKey e ma
-    m = modulus p q
+dBereken:: Integer -> Integer -> Integer
+dBereken d ma = 
 
 --3a
 rsaencrypt :: (Integer, Integer) -> Integer -> Integer
