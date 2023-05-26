@@ -42,36 +42,28 @@ phi p q = (p-1)*(q-1)
 
 eBereken::Integer -> Integer -> Integer
 eBereken phi1 phi2
-  | eCalc == 1    = phi2
+  | eCalc == 1    = phi1
   | otherwise = eBereken (phi1 - 1) phi2
-  where eCalc = mod phi1 phi2
+  where eCalc = mod phi2 phi1
 
 dBereken::Integer -> Integer -> Integer -> Integer
 dBereken e phi randNum = (phi * randNum) - (phi - e)
 
-privKey::Integer -> Integer -> (Integer, Integer)
-privKey p q = (e,m)
+generateKey::Integer -> Integer -> Integer -> [(Integer, Integer)]
+generateKey p q r = [(e,m'),(d,m)]
   where
     m = modulus p q
     m' = phi p q
     e = eBereken m' m'
-    
-pubKey::Integer -> Integer -> (Integer, Integer)
-pubKey p q = (d,m)
-  where
-    m = modulus p q
-    m' = phi p q
-    e = eBereken m' m'
-    d = dBereken e m' 7
+    d = dBereken e m' r
         
-
 --3a
-rsaencrypt :: (Integer, Integer) -> Integer -> Integer
-rsaencrypt (e,m) x = (x^e) `mod` m
+rsaEncrypt :: (Integer, Integer) -> Integer -> Integer
+rsaEncrypt (e,m) x = (x^e) `mod` m
 
 --3b
-rsadecrypt :: (Integer, Integer) -> Integer -> Integer
-rsadecrypt (d,m) x = x^d `mod` m
+rsaDecrypt :: (Integer, Integer) -> Integer -> Integer
+rsaDecrypt (d,m) x = x^d `mod` m
 
 -- 4
 versleutel :: Char -> Int
