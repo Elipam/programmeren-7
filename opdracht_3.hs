@@ -30,31 +30,28 @@ permutaties2Gelijk x y = permutaties / (faca x * faca y)
 
 kans :: String -> Float
 kans a
+    | a == "Straight" = 
     | a == "One pair" = permutatiesGelijk 2 / permutaties
     | a == "Two pair" = permutaties2Gelijk 2 2 / permutaties
+    | a == "Three of a kind" = permutatiesGelijk 3 / permutaties
+    | a == "Four of a kind" = permutatiesGelijk 4 / permutaties
+    | a == "Full house" = permutaties2Gelijk 2 3 / permutaties
+    | a == "Poker" = permutatiesGelijk 5 / permutaties
+    | a == "Bust"
 
 select :: [Float] -> String
-select [1, 2, 3, 4, 5] = "Straight"
-select [2, 3, 4, 5, 6] = "Straight"
-select [a]
-    | heeftWaarde [a] 1 && heeftWaarde [a] 6 = "Bust"
-    | aantal == 4 = "One pair"
-    | aantal == 3 && aantalPairs [a] == 2 = "Two pairs"
-    | aantal == 3 = "Three of a kind"
-    | aantal == 2 = "Full house or Four of a kind"
+select xs 
     | aantal == 1 = "Poker"
-    where
-    aantal = length (group [a])
-
-heeftWaarde :: [Float] -> Float -> Bool
-heeftWaarde xs x = x `elem` xs
-
-aantalPairs :: [Float] -> Int
-aantalPairs xs = length (filter (\x -> length x == 2) (group xs))
-
-select2 :: [Float] -> String
-select2 xs
-    | xs == xs = "ok"
+    | aantal == 2 && max == 4 = "Four of a kind"
+    | aantal == 2 = "Full house"
+    | aantal == 3 && max == 2 = "Two pair"
+    | aantal == 3 = "Three of a kind"
+    | aantal == 4 = "One pair"
+    | aantal == 5 && elem 1 xs && elem 6 xs = "Bust"
+    | aantal == 5 = "Straight"
+  where aantal = length list 
+        list = group (sort xs)
+        max = maximum (map length list)
 
 game :: [Float] -> Float
 game a = kans(select a)
