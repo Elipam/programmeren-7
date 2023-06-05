@@ -25,16 +25,26 @@ permutaties = faca 5
 permutatiesGelijk :: Float -> Float
 permutatiesGelijk x = permutaties / faca x
 
+permutaties2Gelijk :: Float -> Float -> Float
+permutaties2Gelijk x y = permutaties / (faca x * faca y)
+
+kans :: String -> Float
+kans a
+    | a == "One pair" = permutatiesGelijk 2 / permutaties
+    | a == "Two pair" = permutaties2Gelijk 2 2 / permutaties
+
 select :: [Float] -> String
-select [a] 
-    | aantal == 5 = "Straight or Bust"
+select xs 
+    | aantal == 5 = select2 xs
     | aantal == 4 = "One pair"
     | aantal == 3 = "Two pair or Three of a kind"
     | aantal == 2 = "Full house or Four of a kind"
     | aantal == 1 = "Poker"
-    where aantal = length(group [a])
+    where aantal = length(group xs)
 
 select2 :: [Float] -> String
-select2 [a]
-    |
-    where
+select2 xs
+    | xs == xs = "ok"
+
+game :: [Float] -> Float
+game a = kans(select a)
