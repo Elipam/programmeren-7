@@ -30,14 +30,14 @@ permutaties2Gelijk x y = permutaties / (faca x * faca y)
 
 kans :: String -> Float
 kans a
-    | a == "Straight" = 
+    | a == "Straight" = ((6/6)*(5/6)*(4/6)*(3/6)*(2/6))*2
     | a == "One pair" = permutatiesGelijk 2 / permutaties
     | a == "Two pair" = permutaties2Gelijk 2 2 / permutaties
     | a == "Three of a kind" = permutatiesGelijk 3 / permutaties
     | a == "Four of a kind" = permutatiesGelijk 4 / permutaties
     | a == "Full house" = permutaties2Gelijk 2 3 / permutaties
     | a == "Poker" = permutatiesGelijk 5 / permutaties
-    | a == "Bust"
+    | a == "Bust" = 1 - (kans("Straight") + kans("One pair") + kans("Two pair") + kans("Three of a kind") + kans("Four of a kind") + kans("Full house") + kans("Poker"))
 
 select :: [Float] -> String
 select xs 
@@ -53,5 +53,5 @@ select xs
         list = group (sort xs)
         max = maximum (map length list)
 
-game :: [Float] -> Float
-game a = kans(select a)
+game :: [Float] -> (Float, String)
+game a = (kans(select a), select a) 
