@@ -50,7 +50,7 @@ dBereken::Integer -> Integer -> Integer -> Integer
 dBereken e phi randNum = (phi * randNum) - (phi - e)
 
 generateKey::Integer -> Integer -> Integer -> [(Integer, Integer)]
-generateKey p q r = [(e,m'),(d,m)]
+generateKey p q r = [(e,m),(d,m)]
   where
     m = modulus p q
     m' = phi p q
