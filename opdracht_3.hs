@@ -34,13 +34,23 @@ kans a
     | a == "Two pair" = permutaties2Gelijk 2 2 / permutaties
 
 select :: [Float] -> String
-select xs 
-    | aantal == 5 = select2 xs
+select [1, 2, 3, 4, 5] = "Straight"
+select [2, 3, 4, 5, 6] = "Straight"
+select [a]
+    | heeftWaarde [a] 1 && heeftWaarde [a] 6 = "Bust"
     | aantal == 4 = "One pair"
-    | aantal == 3 = "Two pair or Three of a kind"
+    | aantal == 3 && aantalPairs [a] == 2 = "Two pairs"
+    | aantal == 3 = "Three of a kind"
     | aantal == 2 = "Full house or Four of a kind"
     | aantal == 1 = "Poker"
-    where aantal = length(group xs)
+    where
+    aantal = length (group [a])
+
+heeftWaarde :: [Float] -> Float -> Bool
+heeftWaarde xs x = x `elem` xs
+
+aantalPairs :: [Float] -> Int
+aantalPairs xs = length (filter (\x -> length x == 2) (group xs))
 
 select2 :: [Float] -> String
 select2 xs
