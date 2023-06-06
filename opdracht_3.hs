@@ -37,7 +37,7 @@ kans a
     | a == "Four of a kind" = permutatiesGelijk 4 / permutaties
     | a == "Full house" = permutaties2Gelijk 2 3 / permutaties
     | a == "Poker" = permutatiesGelijk 5 / permutaties
-    | a == "Bust" = 1 - (kans("Straight") + kans("One pair") + kans("Two pair") + kans("Three of a kind") + kans("Four of a kind") + kans("Full house") + kans("Poker"))
+    | a == "Bust" = 1 - (kans("Straight") + (kans("One pair") - kans("Two pair")) + (kans("Three of a kind") - kans("Full house")) + (kans("Two pair") - kans("Four of a kind")) + kans("Poker"))
 
 select :: [Float] -> String
 select xs 
