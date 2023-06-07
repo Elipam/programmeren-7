@@ -28,27 +28,19 @@ permutaties2Gelijk x y = permutaties / (faca x * faca y)
 
 kans :: String -> Float
 kans a
-    | a == "Straight" = (6/6)*(5/6)*(4/6)*(3/6)*(2/6)*2
-    | a == "One pair" = (permutatiesGelijk 2 / permutaties) - kans "Two pair" - kans "Three of a kind"
-    | a == "Two pair" = (permutaties2Gelijk 2 2 / permutaties) - kans "Four of a kind"
-    | a == "Three of a kind" = (permutatiesGelijk 3 / permutaties) - kans "Full house"
-    | a == "Full house" = (permutaties2Gelijk 2 3 / permutaties) - kans "Poker"
-    | a == "Four of a kind" = (permutatiesGelijk 4 / permutaties) - kans "Poker"
+    | a == "Straight" = ((6/6)*(5/6)*(4/6)*(3/6)*(2/6))*2
+    | a == "One pair" = permutatiesGelijk 2 / permutaties
+    | a == "Two pair" = permutaties2Gelijk 2 2 / permutaties
+    | a == "Three of a kind" = permutatiesGelijk 3 / permutaties
+    | a == "Four of a kind" = permutatiesGelijk 4 / permutaties
+    | a == "Full house" = permutaties2Gelijk 2 3 / permutaties
     | a == "Poker" = permutatiesGelijk 5 / permutaties
-<<<<<<< HEAD
     | a == "Bust" = 1 - (kans "Straight" + kans "One pair" + kans("Two pair") + kans("Three of a kind") + kans("Four of a kind") + kans("Full house") + kans("Poker"))
     | otherwise = 0
-
 
 select :: [Float] -> String
 select xs 
     | wrong  /= 5 = "Wrong input"
-=======
-    | a == "Bust" = 1 - (kans "Straight" + kans "One pair" + kans "Two pair" + kans "Three of a kind" + kans "Full house" + kans "Four of a kind" + kans "Poker")
-
-select :: [Float] -> String
-select xs
->>>>>>> origin/main
     | aantal == 1 = "Poker"
     | aantal == 2 && max == 4 = "Four of a kind"
     | aantal == 2 = "Full house"
@@ -57,10 +49,10 @@ select xs
     | aantal == 4 = "One pair"
     | aantal == 5 && elem 1 xs && elem 6 xs = "Bust"
     | aantal == 5 = "Straight"
-  where aantal = length list
+  where aantal = length list 
         list = group (sort xs)
         max = maximum (map length list)
         wrong = length list
 
 game :: [Float] -> (Float, String)
-game a = (kans (select a), select a)
+game a = (kans(select a), select a) 
