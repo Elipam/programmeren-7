@@ -9,10 +9,8 @@ integreer :: (Double -> Double) -> Double -> Double -> Double -> Double
 integreer f a b p = sum [f (a + (b - a)) * (b - a)]
 
 -- 2
-dubbelen :: Eq a => [a] -> [a]
-dubbelen s = nub [x | x <- s, count x > 1]
-  where
-    count x = length (filter (== x) s)
+dubbelen :: (Eq a, Ord a) => [a] -> [a]
+dubbelen xs = nub . concat $ [ x | x <- group $ sort xs, length x > 1]
 
 -- 3
 faca :: Float -> Float
@@ -37,10 +35,13 @@ kans a
     | a == "Four of a kind" = permutatiesGelijk 4 / permutaties
     | a == "Full house" = permutaties2Gelijk 2 3 / permutaties
     | a == "Poker" = permutatiesGelijk 5 / permutaties
-    | a == "Bust" = 1 - (kans("Straight") + kans("One pair") + kans("Two pair") + kans("Three of a kind") + kans("Four of a kind") + kans("Full house") + kans("Poker"))
+    | a == "Bust" = 1 - (kans "Straight" + kans "One pair" + kans("Two pair") + kans("Three of a kind") + kans("Four of a kind") + kans("Full house") + kans("Poker"))
+    | otherwise = 0
+
 
 select :: [Float] -> String
 select xs 
+    | wrong  /= 5 = "Wrong input"
     | aantal == 1 = "Poker"
     | aantal == 2 && max == 4 = "Four of a kind"
     | aantal == 2 = "Full house"
@@ -52,6 +53,7 @@ select xs
   where aantal = length list 
         list = group (sort xs)
         max = maximum (map length list)
+        wrong = length list
 
 game :: [Float] -> (Float, String)
 game a = (kans(select a), select a) 
