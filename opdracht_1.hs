@@ -32,7 +32,7 @@ nulpuntenb a b c
     d = b * b - 4 * a * c
 
 -- 2c
--- Gooit dobbelsteen a, b en c en geeft de combinaties die opgeteld een veelvoud van 5 zijn terug, door som door 5 te delen en modulus te checken
+-- Gooit dobbelsteen a, b en c en geeft de combinaties die opgeteld een veelvoud van 5 zijn terug door som van a,b en c door 5 te delen en modulus met 0 te verrgelijken
 dobbelstenen :: [(Integer, Integer, Integer)]
 dobbelstenen = [(a, b, c) | a <- [1 .. 6], b <- [1 .. 6], c <- [1 .. 6], (a + b + c) `mod` 5 == 0]
 
@@ -59,6 +59,7 @@ Zo lang een van de twee cijfers 45????? of daaronder blijft is er geen stackover
 -}
 
 -- 4b
+-- Vermenigvuldigt dmv bitshifting en restanten bij oneven getallen op te tellen.
 fastmult :: Integer -> Integer -> Integer
 fastmult a b
   | a == 0 || b == 0 = 0
@@ -70,9 +71,10 @@ fastmult kan met de getallen die bij de mult functie een stackoverflow veroorzak
 -}
 
 -- 5a
+-- Zet x in macht van p dmv recursie.
 pow :: Integer -> Integer -> Integer
 pow x p
-  | p <= 0 = 1
+  | p == 0 = 1
   | otherwise = x * pow x (p - 1)
 
 {-
@@ -81,10 +83,11 @@ pow 1 9200000 leverde een stack overflow op
 -}
 
 -- 5b
+-- Zet x in de macht van p mbv bitshifting.
 fastpow :: Integer -> Integer -> Integer
-fastpow x 0 = 1
+fastpow _ 0 = 1
+fastpow 0 _ = 0
 fastpow x p
-  | x == 0 = 0
   | even p = fastpow (x * x) (shiftR p 1)
   | otherwise = x * fastpow (x * x) (shiftR p 1)
 
