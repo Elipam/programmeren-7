@@ -50,11 +50,11 @@ opg3 = [(a, b, c) | a <- [-100 .. 100], b <- [-100 .. 100], c <- [-100 .. 100], 
 -- Vermenigvuldigt dmv optellen
 mult :: Integer -> Integer -> Integer
 mult a b
-  | b <= 0 = 0
+  | b < 0 = 0
   | otherwise = a + mult (b - 1) a
 
 {-
-De functie mult geeft een stackoverflow bij mult 1000000000000 4500000.
+De functie mult geeft een stackoverflow bij mult 1000000000000 4600000.
 Zo lang een van de twee cijfers 45????? of daaronder blijft is er geen stackoverflow.
 -}
 

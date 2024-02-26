@@ -11,8 +11,9 @@ egcd :: Integer -> Integer -> (Integer,Integer,Integer)
 egcd 0 b = (b, 0, 1)
 egcd a b =
     let (g, s, t) = egcd (mod b a) a
-    in (g, neg(t - div b a * s)modulo, neg s modulo)
-    where modulo = mod a b
+        modulo = mod a b
+    in (g, neg(t - div b a * s) modulo, neg s modulo)
+
 
 neg :: Integer -> Integer -> Integer
 neg x m
