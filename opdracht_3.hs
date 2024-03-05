@@ -1,12 +1,14 @@
 import Data.List
 
 -- 1a
+-- differentieer (\x -> x^2) 0.01 2.0
 differentieer :: (Double -> Double) -> Double -> Double -> Double
 differentieer f p x = (f (x + p) - f x) / p
 
 -- 1b
+--  integreer (\x -> x^3) 1.0 3.0 0.001
 integreer :: (Double -> Double) -> Double -> Double -> Double -> Double
-integreer f a b p = sum [f (a + (b - a)) * (b - a)]
+integreer f a b p = sum [f n * p | n <- [a+0*p, a+1*p..b]]
 
 -- 2
 dubbelen :: (Eq a, Ord a) => [a] -> [a]
