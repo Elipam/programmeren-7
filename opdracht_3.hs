@@ -15,30 +15,22 @@ dubbelen :: (Eq a, Ord a) => [a] -> [a]
 dubbelen xs = nub . concat $ [ x | x <- group $ sort xs, length x > 1]
 
 -- 3
-faca :: Float -> Float
-faca 0 = 1
-faca n = n * faca ( n - 1 )
+factorial :: Float -> Float
+factorial n = product [1..n]
 
-permutaties :: Float
-permutaties = faca 5
-
-permutatiesGelijk :: Float -> Float
-permutatiesGelijk x = permutaties / faca x
-
-permutaties2Gelijk :: Float -> Float -> Float
-permutaties2Gelijk x y = permutaties / (faca x * faca y)
+combinaties :: Float -> Float -> Float
+combinaties x y = factorial x / (factorial y * factorial (x - y))
 
 kans :: String -> Float
 kans a
-    | a == "Straight" = (6/6)*(5/6)*(4/6)*(3/6)*(2/6)*2
-    | a == "One pair" = permutatiesGelijk 2 / permutaties
-    | a == "Two pair" = permutaties2Gelijk 2 2 / permutaties
-    | a == "Three of a kind" = permutatiesGelijk 3 / permutaties
-    | a == "Four of a kind" = permutatiesGelijk 4 / permutaties
-    | a == "Full house" = permutaties2Gelijk 2 3 / permutaties
-    | a == "Poker" = permutatiesGelijk 5 / permutaties
+    | a == "Straight" = 2 * (5 * 4 * 3 * 2) /7776 
+    | a == "One pair" = factorial 3 * combinaties 6 1 * combinaties 5 2 * combinaties 5 3 / 7776 
+    | a == "Two pair" = combinaties 6 2 * 4 * combinaties 5 3 * combinaties 3 2 / 7776 
+    | a == "Three of a kind" = 6 * combinaties 5 2 * combinaties 5 3 * combinaties 2 1  / 7776 
+    | a == "Four of a kind" = 6 * 5 * 5 / 7776 
+    | a == "Full house" = 6 * 5 * combinaties 5 3 / 7776 
+    | a == "Poker" = 6 / 7776 
     | a == "Bust" = 1 - (kans "Straight" + kans "One pair" + kans "Two pair" + kans "Three of a kind" + kans "Four of a kind" + kans "Full house" + kans "Poker")
-    | otherwise = 0
 
 select :: [Float] -> String
 select xs
