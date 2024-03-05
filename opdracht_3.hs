@@ -46,7 +46,7 @@ select xs
   where aantal = length list
         list = group (sort xs)
         max = maximum (map length list)
-        wrong = length list
+        wrong = length xs
 
 game :: [Float] -> (Float, String)
 game a = (kans (select a), select a)
