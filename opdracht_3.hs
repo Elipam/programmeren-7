@@ -46,7 +46,6 @@ kans a
     | a == "Two pair" = lengteSetVergelijking (4,2) alleMogelijkheden / floatLength alleMogelijkheden
     | a == "Straight" = straightUitzondering alleMogelijkheden / floatLength alleMogelijkheden
     | a == "Bust" = 1 - (kans "Straight" + kans "One pair" + kans "Two pair" + kans "Three of a kind" + kans "Four of a kind" + kans "Full house" + kans "Poker")
-    where mogelijkheden = 6^5
                 
 alleMogelijkheden :: [[Int]]
 alleMogelijkheden = [[a, b, c, d, e] | a <- [1..6], b <- [1..6], c <- [1..6], d <- [1..6], e <- [1..6]]
